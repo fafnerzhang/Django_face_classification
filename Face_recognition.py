@@ -6,7 +6,7 @@ import shutil
 from PIL import Image, ImageDraw
 import numpy as np
 import pandas as pd
-import os, shutil
+import os, shutil, json
 from Image_upload.models import Photo
 
 def Face_embedding(model,folder_name):
@@ -50,21 +50,18 @@ def Face_embedding(model,folder_name):
             name.append(dataset.idx_to_class[y])
             face_num += 1
         face_num_list.append(face_num)
-    print('face num list:',face_num_list)
+
     names = names + Load_image_name(folder_name,face_num_list) # all image name
-    print('names:',names)
+
     aligned = torch.stack(aligned).to(device)
     embeddings = resnet(aligned).detach().cpu()
-    print('embedding shape',embeddings.shape)
-    print('names shape',len(names))
-    #embeddings_dict = { names[i]:embeddings[i] for i in range(len(names))}
     embedding_dict = {}
     now = 0
     for j in face_num_list:
         embedding_dict[f'{names[now]}'] = embeddings[now:now+j,:]
-        print('embedding_dict shape:',embedding_dict[f'{names[now]}'].shape)
+        #print('embedding_dict shape:',embedding_dict[f'{names[now]}'].shape)
         now += j
-    print('embedding dict',embedding_dict)
+    #print('embedding dict',embedding_dict)
     embedding_save(model,embedding_dict)
     image_path = os.path.join(BASE_DIR,'image')
     shutil.rmtree(image_path)
@@ -72,10 +69,12 @@ def Face_embedding(model,folder_name):
 
     dists = [[(e1 - e2).norm().item() for e2 in embeddings] for e1 in embeddings]
     print(pd.DataFrame(dists, columns=names, index=names))
+    tensor_list = []
     for image in Photo.objects.all():
-        print(' model _ ',image.image,image.embedding,type(image.embedding))
-        image_tensor = image.embedding
-        print(image_tensor,type(image_tensor))
+        image_tensor = torch.tensor(json.loads(image.embedding))
+        tensor_list.append(image_tensor)
+        print(image.image,image_tensor.shape,type(image_tensor))
+    print((tensor_list[0]-tensor_list[1]).norm().item())
 def Load_image_name(folder_name,face_num):
     '''
     Get whole image name in file
