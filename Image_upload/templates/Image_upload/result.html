@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block Result %}
+    <div class="container">
+    <form action="#" method="get">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            </div>
+        <div class="form-group col-md-4">
+                <input type="submit" class="btn btn-primary" value="Return to upload page" name="return_to_upload">
+            </div>
+        <div class="form-group col-md-4">
+            </div>
+    </div>
+    </form>
+
+
+    <div class="row">
+        {% for pic in image_list %}
+
+                <div class="col-md-12">
+                <div class="card mb-12 shadow-sm">
+                    <img src="{{ pic.0.image.url }}" class="card-img-top" >
+                    <h3> target {{ forloop.counter }} </h3>
+                </div>
+                </div>
+
+            {% for p in pic.1 %}
+                <div class="col-md-3">
+                <div class="card mb-3 shadow-sm">
+                    <img src="{{ p.image.url }}" class="card-img-top" >
+                    <h4> {{ p.image }}</h4>
+                </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+<br />
+{% block result %}
+    <div class="row">
+        {% for pic in image_list %}
+                <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ pic.0.image.url }}" class="card-img-top" >
+                    <h1>target</h1>
+                </div>
+                </div>
+            {% for p in pic.1 %}
+                <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ p.image.url }}" class="card-img-top" >
+                    <h1> {{ p.image }}</h1>
+                </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

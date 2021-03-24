@@ -21,7 +21,8 @@ from Image_upload import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('photos/', include('Image_upload.urls')),
-    path('target/',views.target,name='target')
+    #path('target/',views.target,name='target'),
+    path('result/',views.result,name='Result')
 ]
 
 if settings.DEBUG:

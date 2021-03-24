@@ -25,7 +25,7 @@ SECRET_KEY = 'g-nl&ced28yw_!)*118x&8e)1xf5w@kr5l*f1h3p1*^h&!pou^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','192.168.1.102']
 
 
 # Application definition
@@ -121,7 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+'''STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    'C:/Users/User/.conda/envs/CV/Lib/site-packages/django/contrib/admin/static'
+    )'''
+STATIC_ROOT = 'staticfile'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
