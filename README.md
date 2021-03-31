@@ -1,6 +1,11 @@
 # Django_face_classification
 Google相簿有一功能是可將有相同人臉的照片分在同一類，因為對相關技術與如何實作有興趣，便進行相關技術的研究，傳統的人臉分類模型最後輸出層為softmax，只要多加一張人臉便必須重新訓練整個網路，網路上搜尋可解決此問題的技術後，決定使用Facenet與Django進行實作
 
+###### 上傳圖片介面
+![](https://i.imgur.com/u8nmKYV.jpg) 
+###### 分類結果
+![分類結果](https://i.imgur.com/wP1a2U9.png) 
+
 ### FaceNet
 ![](https://i.imgur.com/uQFFjfs.png)
 
@@ -11,4 +16,3 @@ https://github.com/timesler/facenet-pytorch
 
 ## 專案架構
 ![](https://i.imgur.com/9gEfgun.png)
-
